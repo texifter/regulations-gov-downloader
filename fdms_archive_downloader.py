@@ -156,7 +156,7 @@ class FDMSArchiveDownloader:
     def _get_docket_documents(self):
         documents_info = []
         if not self._resume or 'document_ids' not in self._resume_info:
-            docket_documents = self._get_all_data_pages('{API_ENDPOINT_BASE}/documents', {
+            docket_documents = self._get_all_data_pages(f'{API_ENDPOINT_BASE}/documents', {
                 'filter[docketId]': self._docket_id,
                 'page[size]': MAX_ITEMS_PER_DATA_PAGE
             })
@@ -185,7 +185,7 @@ class FDMSArchiveDownloader:
                 self._logger.info(
                     f'-------- getting comments for document: {document_id}, objectId: {document_object_id}')
                 comments = self._get_all_data_pages_for_comments(
-                    '{API_ENDPOINT_BASE}/comments', document_object_id)
+                    f'{API_ENDPOINT_BASE}/comments', document_object_id)
                 comments_filename = f'{document_id}_{document_object_id}_comments.json'
                 write_json_output(os.path.join(
                     self._output_directory, comments_filename), comments)
